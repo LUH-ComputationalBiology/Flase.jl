@@ -1,6 +1,6 @@
 @enum DogState begin
-    ACTIVE = 1,
-    OCCUPIED,
+    ACTIVE = 1
+    OCCUPIED
     SLEEPY
 end # enum
 
