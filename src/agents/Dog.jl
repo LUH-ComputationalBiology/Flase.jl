@@ -10,3 +10,25 @@ Base.@kwdef struct Dog{F<:Number}
     position::Point2{F}
     velocity::Point2{F}
 end # struct
+
+function Dog( v::D; kwargs... ) where D<:Dog
+    nt = NamedTuple()
+    for property in propertynames(v)
+        if property in keys(kwargs)
+            nt = merge( nt, NamedTuple{(property,)}(kwargs[property]) )
+            continue
+        end
+        value = getproperty( v, property )
+        if value isa Vector
+            nt = merge( nt, NamedTuple{(property,)}(Ref(copy(value))) )
+            continue
+        end # if
+        nt = merge( nt, NamedTuple{(property,)}(value) )
+    end
+    return D(;nt...)
+end # function
+
+function move( dog::Dog, dt, motion::Motion )
+    new_position, new_velocity = step( motion, dog.position, dog.velocity, dt )
+    return Dog( dog; position = new_position, velocity = new_velocity )
+end # function
