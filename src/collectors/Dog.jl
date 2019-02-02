@@ -3,6 +3,8 @@
     OCCUPIED
     SLEEPY
 end # enum
+Base.length( ::DogState ) = 1
+Base.iterate( ds::DogState, state = 1 ) = nothing
 
 Base.@kwdef struct Dog{F<:Number}
     state::DogState = ACTIVE
@@ -24,15 +26,15 @@ function Dog( v::D; kwargs... ) where D<:Dog
     nt = NamedTuple()
     for property in propertynames(v)
         if property in keys(kwargs)
-            nt = merge( nt, NamedTuple{(property,)}(kwargs[property]) )
+            nt = merge( nt, NamedTuple{(property,)}((kwargs[property],)) )
             continue
         end
         value = getproperty( v, property )
-        if value isa Vector
-            nt = merge( nt, NamedTuple{(property,)}(Ref(copy(value))) )
-            continue
-        end # if
-        nt = merge( nt, NamedTuple{(property,)}(value) )
+        # if value isa Vector
+        #     nt = merge( nt, NamedTuple{(property,)}(Ref(copy(value))) )
+        #     continue
+        # end # if
+        nt = merge( nt, NamedTuple{(property,)}((value,)) )
     end
     return D(;nt...)
 end # function
