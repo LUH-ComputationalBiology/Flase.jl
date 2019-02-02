@@ -11,6 +11,15 @@ Base.@kwdef struct Dog{F<:Number}
     velocity::Point2{F}
 end # struct
 
+function Dog( position, velocity )
+    T = eltype(position)
+    @assert T == eltype(velocity)
+    Dog{T}(;
+        position = convert(Point2{T}, position),
+        velocity = convert(Point2{T}, velocity),
+        )
+end # function
+
 function Dog( v::D; kwargs... ) where D<:Dog
     nt = NamedTuple()
     for property in propertynames(v)
