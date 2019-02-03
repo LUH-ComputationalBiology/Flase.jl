@@ -46,10 +46,10 @@ end # function
 
 work( d::Dog, dt ) = work( Val(d.state), d, dt )
 function work( ::Val{ACTIVE}, dog::Dog, dt )
-
+    # TODO
 end # function
 function work( ::Val{OCCUPIED}, dog::Dog, dt )
-
+    # TODO
 end # function
 function work( ::Val{SLEEPY}, dog::Dog, dt )
     if dog.sleepyness == 0
