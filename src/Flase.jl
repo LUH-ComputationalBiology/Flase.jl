@@ -1,6 +1,7 @@
 module Flase
 
 export InfiniteSimulation
+export BrownianMotion, ConstVelocity
 export World
 
 include("motions/Motion.jl")

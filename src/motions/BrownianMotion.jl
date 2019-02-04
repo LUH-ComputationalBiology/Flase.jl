@@ -13,8 +13,8 @@ function BrownianMotion( noise::F, friction::F ) where F<:Number
     BrownianMotion{F}( noise, persistence_time, persistence_length, effective_diffusion, friction )
 end # function
 
-function BrownianMotion()
-    return BrownianMotion( 0.0, 0.0 )
+function BrownianMotion(; noise = 0.0, friction = 0.0 )
+    BrownianMotion( noise, friction )
 end # function
 
 function step( motion::BrownianMotion, position::P, velocity::V, dt ) where {P,V}
