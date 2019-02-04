@@ -11,3 +11,4 @@ world = World(
         friction = 1.0
         )
     )
+world.dogs.positions

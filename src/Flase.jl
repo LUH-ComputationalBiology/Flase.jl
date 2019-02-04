@@ -2,6 +2,7 @@ module Flase
 
 export InfiniteSimulation
 export BrownianMotion, ConstVelocity
+export UnicodePlotter
 export World
 
 include("motions/Motion.jl")
@@ -16,6 +17,8 @@ include("collectors/Dogs.jl")
 include("World.jl")
 
 include("plotter/Plotter.jl")
+include("plotter/VoidPlotter.jl")
+include("plotter/UnicodePlotter.jl")
 
 include("simulations/Simulation.jl")
 include("simulations/InfiniteSimulation.jl")
