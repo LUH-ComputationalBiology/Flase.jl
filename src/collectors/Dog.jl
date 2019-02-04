@@ -39,12 +39,6 @@ function Dog( v::D; kwargs... ) where D<:Dog
     return D(;nt...)
 end # function
 
-function move( dog::Dog, dt, motion::Motion )
-    new_position, new_velocity = step( motion, dog.position, dog.velocity, dt )
-    new_position = pbc( new_position )
-    return Dog( dog; position = new_position, velocity = new_velocity )
-end # function
-
 work( d::Dog, dt ) = work( Val(d.state), d, dt )
 function work( ::Val{ACTIVE}, dog::Dog, dt )
     # TODO

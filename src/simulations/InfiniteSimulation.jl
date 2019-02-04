@@ -7,7 +7,7 @@ end
 
 function run( sim::InfiniteSimulation )
     while true
-        iterate( sim, world, dt )
+        iterate( sim, dt )
         sim.time[] += sim.dt
 
         Flase.plot( sim.plotter, sim.world, sim.time[] )
