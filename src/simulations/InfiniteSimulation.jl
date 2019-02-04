@@ -1,3 +1,4 @@
+
 struct InfiniteSimulation{F<:Number,W<:World, P<:Plotter} <: Simulation
     time::Base.RefValue{F}
     dt::F
@@ -14,9 +15,11 @@ function runsim( sim::InfiniteSimulation )
         iterate( sim )
         sim.time[] += sim.dt
 
-        for _ in 1:5; print("\b"); end
-        p = plot( sim.plotter, sim.world, sim.time[] )
+        p = plot!( p, sim.plotter, sim.world, sim.time[] )
         display(p)
+        sleep( 0.1 )
     end # while
-    return sim.time[]
+    endtime = sim.time[]
+    sim.time[] = zero(sim.time[])
+    return endtime
 end # function
