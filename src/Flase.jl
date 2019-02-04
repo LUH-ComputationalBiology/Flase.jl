@@ -1,6 +1,6 @@
 module Flase
 
-export InfiniteSimulation
+export InfiniteSimulation, runsim
 export BrownianMotion, ConstVelocity
 export UnicodePlotter
 export World

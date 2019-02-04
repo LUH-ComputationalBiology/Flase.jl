@@ -1,10 +1,16 @@
-using UnicodePlots
+import UnicodePlots
 struct UnicodePlotter <: Plotter; end
 
 function plot( ::UnicodePlotter, world::World, time )
     positions = world.dogs.positions
     xs = map( p->p[1], positions )
     ys = map( p->p[2], positions )
-    display( UnicodePlots.plot( xs, ys ) )
+    return UnicodePlots.scatterplot( xs, ys )
+end # function
+function plot!( p, ::UnicodePlotter, world::World, time )
+    positions = world.dogs.positions
+    xs = map( p->p[1], positions )
+    ys = map( p->p[2], positions )
+    UnicodePlots.scatterplot!( p, xs, ys )
     return nothing
 end # function

@@ -5,6 +5,8 @@ function move( dog::Dog, world::World, dt, motion::Motion )
     return Dog( dog; position = new_position, velocity = new_velocity )
 end # function
 
-function move( dogs::Dogs, world::World, dt )
-    dogs.member .= move.( dogs.member, world, dt, Ref(dogs.motion) )
+function move_dogs!( world::World, dt )
+    dogs = world.dogs
+    dogs.member .= move.( dogs.member, Ref(world), dt, Ref(dogs.motion) )
+    return nothing
 end # function

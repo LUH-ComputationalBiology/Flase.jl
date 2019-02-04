@@ -11,4 +11,9 @@ world = World(
         friction = 1.0
         )
     )
-world.dogs.positions
+simulation = InfiniteSimulation(;
+    dt = 0.01,
+    world = world,
+    plotter = UnicodePlotter()
+    )
+runsim( simulation )
