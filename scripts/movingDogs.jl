@@ -14,4 +14,4 @@ simulation = InfiniteSimulation(;
     world = world,
     plotter = UnicodePlotter()
     )
-runsim( simulation )
+Flase.runsim( simulation )

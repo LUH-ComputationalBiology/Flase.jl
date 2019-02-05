@@ -1,7 +1,13 @@
 import UnicodePlots
 using StaticArrays
 
-struct UnicodePlotter <: Plotter; end
+struct UnicodePlotter{T<:Number} <: Plotter;
+    fps::T
+end
+
+function UnicodePlotter(; fps = 20)
+    UnicodePlotter{typeof(fps)}(fps)
+end # function
 
 function plot( ::UnicodePlotter, world::World, time )
     positions = world.dogs.positions
@@ -15,7 +21,7 @@ function plot( ::UnicodePlotter, world::World, time )
     return p
 end # function
 
-function plot!( io, p, ::UnicodePlotter, world::World, time )
+function plot!( io, p, plotter::UnicodePlotter, world::World, time )
     for _ in 1:(UnicodePlots.nrows( p.graphics )+p.margin)
         print(io, "\e[2K\e[1F")
     end # for
@@ -27,7 +33,8 @@ function plot!( io, p, ::UnicodePlotter, world::World, time )
         ylim = @SVector([0, world.boxsize[]])
         )
     show(IOContext(io, :color => true), p)
-    print(io,"\n\t\t\tPress Ctrl-C to end simulation.")
+    print(io,"\n\t\tPress Enter twice to end simulation.")
     print(stdout, String(take!(io)))
+    sleep( 1 / plotter.fps )
     return nothing
 end # function
