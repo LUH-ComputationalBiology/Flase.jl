@@ -16,7 +16,7 @@ function plot( ::UnicodePlotter, world::World, time )
 end # function
 
 function plot!( io, p, ::UnicodePlotter, world::World, time )
-    for _ in 1:(UnicodePlots.nrows( p.graphics )+p.margin-1)
+    for _ in 1:(UnicodePlots.nrows( p.graphics )+p.margin)
         print(io, "\e[2K\e[1F")
     end # for
     positions = world.dogs.positions
@@ -27,6 +27,7 @@ function plot!( io, p, ::UnicodePlotter, world::World, time )
         ylim = @SVector([0, world.boxsize[]])
         )
     show(IOContext(io, :color => true), p)
+    print(io,"\n\t\t\tPress Ctrl-C to end simulation.")
     print(stdout, String(take!(io)))
     return nothing
 end # function

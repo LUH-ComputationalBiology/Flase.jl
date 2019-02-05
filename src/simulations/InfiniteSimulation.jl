@@ -13,15 +13,18 @@ function runsim( sim::InfiniteSimulation )
     io = IOBuffer()
     print(io, "\e[25l")
     print(io, "\e[2K\e[1F")
-    while true
-        iterate( sim )
-        sim.time[] += sim.dt
+    try
+        while true
+            iterate( sim )
+            sim.time[] += sim.dt
 
-        plot!( io, p, sim.plotter, sim.world, sim.time[] )
-        sleep( 0.1 )
-    end # while
-    print(io, "\e[25h")
-    endtime = sim.time[]
-    sim.time[] = zero(sim.time[])
-    return endtime
+            plot!( io, p, sim.plotter, sim.world, sim.time[] )
+            sleep( 0.1 )
+        end # while
+    finally
+        print(io, "\e[25h")
+        endtime = sim.time[]
+        sim.time[] = zero(sim.time[])
+        return endtime
+    end # try
 end # function
