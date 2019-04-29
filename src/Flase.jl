@@ -11,8 +11,8 @@ include("motions/BrownianMotion.jl")
 
 include("collectors/Dog.jl")
 include("collectors/Dogs.jl")
-# include("items/Sheep.jl")
-# include("items/Sheeps.jl")
+include("items/Sheeps.jl")
+include("items/DenseSheeps.jl")
 
 include("World.jl")
 
