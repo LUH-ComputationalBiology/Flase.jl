@@ -8,7 +8,7 @@ end # function
 
 function kickSheep!( sheep::Sheeps )
     while !isempty(sheep.diffusion_candidates)
-        coords = popfirst!( diffusion_candidates )
+        coords = popfirst!( sheep.diffusion_candidates )
         n_sheep = getNSheep( sheep, coords... )
         if n_sheep <= sheep.capacity
             continue

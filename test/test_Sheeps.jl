@@ -22,4 +22,11 @@ using StaticArrays
         @test Flase._setNSheep!( sheep, 1, 2, 2 ) == 1
         @test sheep.diffusion_candidates[1] == (1,2)
     end # testset
+
+    @testset "iteration" begin
+        for (n, ind) in sheep10
+            @test sheep10.grid[ind] == n
+        end #for
+        @test length(sheep10) == 10
+    end # testset
 end # testset

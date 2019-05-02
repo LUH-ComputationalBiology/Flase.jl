@@ -21,6 +21,21 @@ function DenseSheeps{L}( total_sheep; kwargs...  ) where L
     return sheep
 end # function
 
+##< iterator interface
+function Base.iterate( sheep::DenseSheeps, state = firstindex(sheep.grid) )
+    for i in range(state,lastindex(sheep.grid), step = 1)
+        n_sheep = sheep.grid[i]
+        if n_sheep != 0
+            return (n_sheep, i), i+1
+        end # if
+    end # for
+    return nothing
+end # function
+
+Base.eltype( sheep::DenseSheeps ) = Tuple{ Base.eltype( sheep.grid ), Base.eltype(firstindex( sheep.grid ) ) }
+Base.length( sheep::DenseSheeps ) = Base.length( findall(!iszero, sheep.grid) )
+##>
+
 function _setNSheep!( sheep::DenseSheeps, i, j, n )
     old = sheep.grid[i,j]
     sheep.grid[i,j] = n
@@ -33,3 +48,10 @@ end # function
 function getNSheep( sheep::DenseSheeps, i, j )
     return sheep.grid[i,j]
 end
+
+"""
+Returns random index of occupied grid-field.
+"""
+function getRandomSheep( sheep::DenseSheeps )
+    rand( findall(!iszero, sheep.grid) )
+end # function
