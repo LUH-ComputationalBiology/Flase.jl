@@ -1,6 +1,6 @@
 module Flase
 
-export InfiniteSimulation, runsim
+export InfiniteSimulation, FiniteSimulation, runsim
 export BrownianMotion, ConstVelocity
 export UnicodePlotter
 export World
@@ -17,12 +17,15 @@ include("items/DenseSheeps.jl")
 
 include("World.jl")
 
+include("item-collector-interactions.jl")
+
 include("plotter/Plotter.jl")
 include("plotter/VoidPlotter.jl")
 include("plotter/UnicodePlotter.jl")
 
 include("simulations/Simulation.jl")
 include("simulations/InfiniteSimulation.jl")
+include("simulations/FiniteSimulation.jl")
 
 include("interactions.jl")
 

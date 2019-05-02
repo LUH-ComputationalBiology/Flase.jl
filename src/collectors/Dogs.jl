@@ -21,3 +21,15 @@ function Base.getproperty( d::Dogs{M,N,D}, ::Val{:positions} ) where {M<:Motion,
     # TODO: gefällt mir nicht (allocations?)
     return SizedVector{N,T}( [dog.position for dog in d.member] )
 end # function
+
+function Base.iterate(ds::Dogs)
+    Base.iterate( ds.member )
+end # function
+
+function Base.length(ds::Dogs)
+    Base.length( ds.member )
+end # function
+
+function Base.eltype(ds::Dogs)
+    Base.eltype( ds.member )
+end # function

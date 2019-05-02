@@ -3,11 +3,25 @@ using GeometryTypes
 
 struct World{F<:Number,D<:Dogs,S<:Sheeps}
     boxsize::Base.RefValue{F}
+    business_rate::F
+    freedom_rate::F
+    meanSleepyness::F
+    meanSheepDiffusionTime::F
     dogs::D
     sheeps::S
 end
 
-function World(; v0 = 0, n_dogs = 0, boxsize::F = 0.0, motion::M = BrownianMotion(), sheeps = DenseSheeps{convert(Int,boxsize)}(10) ) where {F<:Number,M<:Motion}
+function World(;
+    v0 = 0,
+    n_dogs = 0,
+    boxsize::F = 0.0,
+    business_rate::F = 20.0,
+    freedom_rate::F = 20.0,
+    meanSleepyness::F = 0.1,
+    meanSheepDiffusionTime::F = 1000.0,
+    motion::M = BrownianMotion(),
+    sheeps = DenseSheeps{convert(Int,boxsize)}(10),
+    ) where {F<:Number,M<:Motion}
     dogvec = SizedArray{Tuple{n_dogs},Dog{F}}(undef)
     @inbounds for i in 1:n_dogs
         ϕ = 2π * rand()
@@ -17,7 +31,7 @@ function World(; v0 = 0, n_dogs = 0, boxsize::F = 0.0, motion::M = BrownianMotio
                      )
     end # for
     dogs = Dogs{M,n_dogs,Dog{F}}(dogvec, motion)
-    return World{F,typeof(dogs),typeof(sheeps)}(Ref(boxsize), dogs, sheeps)
+    return World{F,typeof(dogs),typeof(sheeps)}(Ref(boxsize),business_rate, freedom_rate, meanSleepyness, meanSheepDiffusionTime, dogs, sheeps)
 end # function
 
 function pbc( position::P, world::World ) where P
@@ -29,4 +43,16 @@ function pbc( position::P, world::World ) where P
     while ty < 0; ty += boxsize; end
 
     return P( tx, ty )
+end # function
+
+function getSheepCoords( world::World{<:Number,<:Dogs,<:Sheeps{L}}, position ) where L
+    x, y = position
+    i = convert(typeof(L), (x ÷ world.boxsize[] * L)) + 1
+    j = convert(typeof(L), (y ÷ world.boxsize[] * L)) + 1
+    return i,j
+end # function
+
+function work!( world::World, dt )
+    world.dogs.member .= work!.( Ref(world), world.dogs.member, dt )
+    return nothing
 end # function

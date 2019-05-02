@@ -1,3 +1,5 @@
+using Distributions
+
 @enum DogState begin
     ACTIVE = 1
     OCCUPIED
@@ -37,18 +39,4 @@ function Dog( v::D; kwargs... ) where D<:Dog
         nt = merge( nt, NamedTuple{(property,)}((value,)) )
     end
     return D(;nt...)
-end # function
-
-work( d::Dog, dt ) = work( Val(d.state), d, dt )
-function work( ::Val{ACTIVE}, dog::Dog, dt )
-    # TODO
-end # function
-function work( ::Val{OCCUPIED}, dog::Dog, dt )
-    # TODO
-end # function
-function work( ::Val{SLEEPY}, dog::Dog, dt )
-    if dog.sleepyness == 0
-        return Dog( dog; state = ACTIVE )
-    end # if
-    return Dog( dog; sleepyness = dog.sleepyness - 1 )
 end # function

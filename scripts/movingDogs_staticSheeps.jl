@@ -10,8 +10,9 @@ world = World(
         ),
     sheeps = DenseSheeps{10}(10)
     )
-simulation = InfiniteSimulation(;
-    dt = 0.05,
+simulation = FiniteSimulation(;
+    dt = 0.1,
+    end_time = 1.0,
     world = world,
     plotter = UnicodePlotter()
     )
