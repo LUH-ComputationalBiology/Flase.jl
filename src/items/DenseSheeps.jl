@@ -1,11 +1,35 @@
 using StaticArrays
-#Base.@kwdef
-struct DenseSheeps{L} <: Sheeps{L}
+Base.@kwdef struct DenseSheeps{L} <: Sheeps{L}
     # # TODO: gridsize needed?
-    gridsize::Int# = L
-    capacity::Int# = 1
-    available_sheeps::Int# = 0
-    grid::SizedArray{Tuple{L,L},Int64,2,2}
+    capacity::Int = 1
+    available_sheeps::Base.RefValue{Int} = Ref(0)
+    current_sheep::Base.RefValue{Int} = Ref(0)
+    diffusion_candidates::Vector{Tuple{Int,Int}} = Tuple{Int,Int}[]
+    grid::SizedArray{Tuple{L,L},Int64,2,2} = Size(L,L)( zeros(Int,L,L) )
 end
 
-DenseSheeps(; gridsize = 10, capacity = 1, available_sheeps = 0 ) = DenseSheeps{gridsize}( gridsize, capacity, available_sheeps, Size(gridsize,gridsize)( zeros(Int,gridsize,gridsize) ) )
+function DenseSheeps{L}( total_sheep; kwargs...  ) where L
+    sheep = DenseSheeps{L}(;kwargs...)
+    for _ in 1:total_sheep
+        i = rand(1:L)
+        j = rand(1:L)
+        n_sheep = getNSheep( sheep, i, j )
+        setNSheep!( sheep, i, j, n_sheep + 1 )
+    end # for
+    sheep.current_sheep[] = total_sheep
+    kickSheep!( sheep )
+    return sheep
+end # function
+
+function _setNSheep!( sheep::DenseSheeps, i, j, n )
+    old = sheep.grid[i,j]
+    sheep.grid[i,j] = n
+    if n > sheep.capacity
+        push!( sheep.diffusion_candidates, (i,j) )
+    end # if
+    return old
+end # function
+
+function getNSheep( sheep::DenseSheeps, i, j )
+    return sheep.grid[i,j]
+end
