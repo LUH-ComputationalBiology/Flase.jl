@@ -4,6 +4,7 @@ export InfiniteSimulation, runsim
 export BrownianMotion, ConstVelocity
 export UnicodePlotter
 export World
+export DenseSheeps
 
 include("motions/Motion.jl")
 include("motions/ConstVelocity.jl")

@@ -11,6 +11,7 @@ InfiniteSimulation(; time = Ref(0.0), dt::F, world::W, plotter::P = VoidPlotter(
 function runsim( sim::InfiniteSimulation )
     p = plot( sim.plotter, sim.world, sim.time[] )
     io = IOBuffer()
+    print(io, "\e[25l")
     @sync begin
     is_running = Base.RefValue(true)
     @async begin
@@ -19,8 +20,6 @@ function runsim( sim::InfiniteSimulation )
         return nothing
     end # async
     @async begin
-        print(io, "\e[25l")
-        print(io, "\e[2K\e[1F")
         while is_running[]
             iterate( sim )
             sim.time[] += sim.dt

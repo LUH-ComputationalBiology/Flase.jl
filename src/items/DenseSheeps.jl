@@ -22,17 +22,17 @@ function DenseSheeps{L}( total_sheep; kwargs...  ) where L
 end # function
 
 ##< iterator interface
-function Base.iterate( sheep::DenseSheeps, state = firstindex(sheep.grid) )
+function Base.iterate( sheep::DenseSheeps{L}, state = firstindex(sheep.grid) ) where L
     for i in range(state,lastindex(sheep.grid), step = 1)
         n_sheep = sheep.grid[i]
         if n_sheep != 0
-            return (n_sheep, i), i+1
+            return (n_sheep, CartesianIndices(sheep.grid)[i]), i+1
         end # if
     end # for
     return nothing
 end # function
 
-Base.eltype( sheep::DenseSheeps ) = Tuple{ Base.eltype( sheep.grid ), Base.eltype(firstindex( sheep.grid ) ) }
+Base.eltype( sheep::DenseSheeps ) = Tuple{ Base.eltype( sheep.grid ), CartesianIndex{2} }
 Base.length( sheep::DenseSheeps ) = Base.length( findall(!iszero, sheep.grid) )
 ##>
 
