@@ -1,12 +1,19 @@
 import UnicodePlots
 using StaticArrays
 
-struct UnicodePlotter{T<:Number} <: Plotter;
+const CountType = UInt32
+struct UnicodePlotter{T<:Number} <: Plotter
     fps::T
+    counter::Base.RefValue{CountType}
+    skip::CountType
 end
 
-function UnicodePlotter(; fps = 20)
-    UnicodePlotter{typeof(fps)}(fps)
+function UnicodePlotter(; fps = 20, counter = 0, skip = 0 )
+    UnicodePlotter{typeof(fps)}(
+        fps,
+        Ref(convert(CountType, counter)),
+        convert(CountType, skip)
+        )
 end # function
 
 function plot( ::UnicodePlotter, world::World, time )
@@ -35,13 +42,16 @@ function plot( ::UnicodePlotter, world::World, time )
 end # function
 
 function plot!( io, p, plotter::UnicodePlotter, world::World, time )
-    for _ in 1:(UnicodePlots.nrows( p.graphics )+p.margin)
-        print(io, "\e[2K\e[1F")
-    end # for
-    p = plot( plotter, world, time )
-    show(IOContext(io, :color => true), p)
-    print(io,"\n\t\tPress Enter twice to end simulation.")
-    print(stdout, String(take!(io)))
-    sleep( 1 / plotter.fps )
+    if plotter.counter[] % plotter.skip == zero(CountType)
+        for _ in 1:(UnicodePlots.nrows( p.graphics )+p.margin)
+            print(io, "\e[2K\e[1F")
+        end # for
+        p = plot( plotter, world, time )
+        show(IOContext(io, :color => true), p)
+        print(io,"\n\t\tPress Enter twice to end simulation.")
+        print(stdout, String(take!(io)))
+        sleep( 1 / plotter.fps )
+    end # if
+    plotter.counter[] += 1
     return nothing
 end # function
