@@ -8,7 +8,6 @@ using StaticArrays
     zero_grid = Size(10,10)(zeros(Int,10,10))
     @testset "Defaults" begin
         @test sheep.capacity == 1
-        @test sheep.available_sheeps[] == 0
         @test sheep.current_sheep[] == 0
         @test sheep.grid == zero_grid
         @test sheep10.current_sheep[] == 10

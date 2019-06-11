@@ -2,7 +2,7 @@ using StaticArrays
 Base.@kwdef struct DenseSheeps{L} <: Sheeps{L}
     # # TODO: gridsize needed?
     capacity::Int = 1
-    available_sheeps::Base.RefValue{Int} = Ref(0)
+    # available_sheeps::Base.RefValue{Int} = Ref(0)
     current_sheep::Base.RefValue{Int} = Ref(0)
     diffusion_candidates::Vector{Tuple{Int,Int}} = Tuple{Int,Int}[]
     grid::SizedArray{Tuple{L,L},Int64,2,2} = Size(L,L)( zeros(Int,L,L) )
