@@ -4,6 +4,7 @@ world = World(
     v0 = 1.,
     n_dogs = 500,
     boxsize = 10.0,
+    freedom_rate = 0.1,
     motion = BrownianMotion(
         noise = 0.5,
         friction = 1.0
