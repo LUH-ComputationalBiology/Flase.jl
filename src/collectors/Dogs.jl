@@ -22,8 +22,12 @@ function Base.getproperty( d::Dogs{M,N,D}, ::Val{:positions} ) where {M<:Motion,
     return SizedVector{N,T}( [dog.position for dog in d.member] )
 end # function
 
-function Base.iterate(ds::Dogs)
-    Base.iterate( ds.member )
+function Base.iterate(ds::Dogs, state = nothing)
+    if state === nothing
+        Base.iterate( ds.member )
+    else
+        Base.iterate( ds.member, state )
+    end
 end # function
 
 function Base.length(ds::Dogs)
