@@ -8,11 +8,14 @@ world = World(
         noise = 0.5,
         friction = 1.0
         ),
-    sheeps = DenseSheeps{10}(10)
+    sheeps = DenseSheeps(
+        n_sheeps = 10,
+        gridsize = 10,
+        )
     )
 simulation = FiniteSimulation(;
-    dt = 0.1,
-    end_time = 1.0,
+    dt = 0.2,
+    end_time = 100.0,
     world = world,
     plotter = UnicodePlotter()
     )

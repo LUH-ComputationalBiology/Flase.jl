@@ -21,6 +21,10 @@ function DenseSheeps{L}( total_sheep; kwargs...  ) where L
     return sheep
 end # function
 
+function DenseSheeps(; gridsize, n_sheeps, kwargs...)
+    return DenseSheeps{gridsize}(n_sheeps; kwargs...)
+end # function
+
 ##< iterator interface
 function Base.iterate( sheep::DenseSheeps{L}, state = firstindex(sheep.grid) ) where L
     for i in range(state,lastindex(sheep.grid), step = 1)
