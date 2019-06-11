@@ -10,13 +10,23 @@ function UnicodePlotter(; fps = 20)
 end # function
 
 function plot( ::UnicodePlotter, world::World, time )
-    positions = world.dogs.positions
-    xs = map( p->p[1], positions )
-    ys = map( p->p[2], positions )
-    p = UnicodePlots.scatterplot( xs, ys,
-        xlim = @SVector([0, world.boxsize[]]),
-        ylim = @SVector([0, world.boxsize[]])
-        )
+    active_dogs = filter( d->(d.state==ACTIVE), world.dogs.member )
+    sleepy_dogs = typeof(world.dogs.member)[]
+    occupied_dogs = typeof(world.dogs.member)[]
+    if length( active_dogs ) < length( world.dogs )
+        sleepy_dogs = filter( d->(d.state==SLEEPY), world.dogs.member )
+        occupied_dogs = filter( d->(d.state==OCCUPIED), world.dogs.member )
+    end
+    p = UnicodePlots.scatterplot( Float64[],
+            xlim = @SVector([0, world.boxsize[]]),
+            ylim = @SVector([0, world.boxsize[]])
+            )
+    for data in ( (active_dogs,:green), (sleepy_dogs,:red), (occupied_dogs,:white) )
+        positions = getproperty.( data[1], :position )
+        xs = map( p->p[1], positions )
+        ys = map( p->p[2], positions )
+        p = UnicodePlots.scatterplot!( p, xs, ys, color = data[2] )
+    end # for
     sheeps = collect( world.sheeps )
     sheep_xs = map( s->s[2][1], sheeps )
     sheep_ys = map( s->s[2][2], sheeps )

@@ -2,20 +2,20 @@ using Flase
 
 world = World(
     v0 = 1.,
-    n_dogs = 120,
+    n_dogs = 500,
     boxsize = 10.0,
     motion = BrownianMotion(
         noise = 0.5,
         friction = 1.0
         ),
     sheeps = DenseSheeps(
-        n_sheeps = 10,
+        n_sheeps = 25,
         gridsize = 10,
         )
     )
 simulation = FiniteSimulation(;
     dt = 0.2,
-    end_time = 100.0,
+    end_time = 200.0,
     world = world,
     plotter = UnicodePlotter()
     )
