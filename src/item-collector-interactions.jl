@@ -18,6 +18,7 @@ function work!( world, ::Val{OCCUPIED}, dog::Dog, dt )
     n_sheep = getNSheep( world.sheeps, i, j )
     n_sheep == 0 && return dog
     if rand() < n_sheep * world.freedom_rate * dt
+        # drop a sheep
         setNSheep!( world.sheeps, i, j, n_sheep + 1 )
         return Dog( dog;
                 state = SLEEPY,

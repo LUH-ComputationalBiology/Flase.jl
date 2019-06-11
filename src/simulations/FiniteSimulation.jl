@@ -22,14 +22,20 @@ function runsim( sim::FiniteSimulation )
     p = plot( sim.plotter, sim.world, sim.time[] )
     io = IOBuffer()
     print(io, "\e[25l")
-    for _ in 0:sim.end_time÷sim.dt
-        iterate( sim )
-        sim.time[] += sim.dt
+    # try
+        for _ in 0:sim.end_time÷sim.dt
+            iterate( sim )
+            sim.time[] += sim.dt
 
-        plot!( io, p, sim.plotter, sim.world, sim.time[] )
-    end # while
-    print(io, "\e[25h")
-    endtime = sim.time[]
-    sim.time[] = zero(sim.time[])
-    return endtime
+            plot!( io, p, sim.plotter, sim.world, sim.time[] )
+        end # while
+    # catch err
+    #     @error "Caught $err !"
+    #     rethrow( err )
+    # finally
+        print(io, "\e[25h")
+        endtime = sim.time[]
+        sim.time[] = zero(sim.time[])
+        return endtime
+    # end # try
 end # function
