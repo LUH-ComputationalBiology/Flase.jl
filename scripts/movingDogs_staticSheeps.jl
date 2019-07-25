@@ -20,9 +20,9 @@ world = World(
     )
 simulation = FiniteSimulation(;
     dt = 0.1,
-    end_time = 1000.0,
+    end_time = 1.0,
     world = world,
-    plotter = UnicodePlotter( skip = 200 )
+    plotter = UnicodePlotter()
     )
     # TODO: get this smooth
 # simulation = FiniteSimulation(;
@@ -31,4 +31,4 @@ simulation = FiniteSimulation(;
 #     world = world,
 #     plotter = UnicodePlotter( skip = 2_000 )
 #     )
-Flase.runsim( simulation )
+Juno.@profiler Flase.runsim( simulation )

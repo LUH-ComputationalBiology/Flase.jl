@@ -24,6 +24,7 @@ function Dog( position, velocity )
         )
 end # function
 
+#TODO: this is slow and allocating
 function Dog( v::D; kwargs... ) where D<:Dog
     nt = NamedTuple()
     for property in propertynames(v)

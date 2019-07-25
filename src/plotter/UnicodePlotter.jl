@@ -8,7 +8,7 @@ struct UnicodePlotter{T<:Number} <: Plotter
     skip::CountType
 end
 
-function UnicodePlotter(; fps = 20, counter = 0, skip = 0 )
+function UnicodePlotter(; fps = 20, counter = 0, skip = 1 )
     UnicodePlotter{typeof(fps)}(
         fps,
         Ref(convert(CountType, counter)),
