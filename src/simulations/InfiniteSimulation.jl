@@ -29,7 +29,7 @@ function runsim( sim::InfiniteSimulation )
     end # async
     @async begin
         while is_running[]
-            iterate( sim )
+            iterate!( sim )
             sim.time[] += sim.dt
 
             plot!( io, p, sim.plotter, sim.world, sim.time[] )

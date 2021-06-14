@@ -6,7 +6,7 @@ using Distributions
     SLEEPY
 end # enum
 Base.length( ::DogState ) = 1
-Base.iterate( ds::DogState, state = 1 ) = nothing
+Base.iterate!( ds::DogState, state = 1 ) = nothing
 
 Base.@kwdef struct Dog{F<:Number}
     state::DogState = ACTIVE

@@ -24,7 +24,7 @@ function runsim( sim::FiniteSimulation )
     print(io, "\e[25l")
     # try
         for _ in 0:sim.end_time÷sim.dt
-            iterate( sim )
+            iterate!( sim )
             sim.time[] += sim.dt
 
             plot!( io, p, sim.plotter, sim.world, sim.time[] )
