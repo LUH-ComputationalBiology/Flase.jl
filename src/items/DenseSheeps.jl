@@ -5,7 +5,7 @@ Base.@kwdef struct DenseSheeps{L} <: Sheeps{L}
     # available_sheeps::Base.RefValue{Int} = Ref(0)
     current_sheep::Base.RefValue{Int} = Ref(0)
     diffusion_candidates::Vector{Tuple{Int,Int}} = Tuple{Int,Int}[]
-    grid::SizedArray{Tuple{L,L},Int64,2,2} = Size(L,L)( zeros(Int,L,L) )
+    grid::SizedArray{Tuple{L,L},Int64,2,2} = SizedMatrix{L,L}( zeros(Int,L,L) )
 end
 
 function DenseSheeps{L}( total_sheep; kwargs...  ) where L
@@ -21,6 +21,7 @@ function DenseSheeps{L}( total_sheep; kwargs...  ) where L
     return sheep
 end # function
 
+#TODO: this method overwrites Base.@kwdefs method
 function DenseSheeps(; gridsize, n_sheeps, kwargs...)
     return DenseSheeps{gridsize}(n_sheeps; kwargs...)
 end # function
