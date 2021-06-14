@@ -25,7 +25,6 @@ function runsim( sim::FiniteSimulation )
     # try
         for _ in 0:sim.end_time÷sim.dt
             iterate!( sim )
-            sim.time[] += sim.dt
 
             plot!( io, p, sim.plotter, sim.world, sim.time[] )
         end # while
