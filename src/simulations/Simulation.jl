@@ -4,7 +4,7 @@ function iterate!( sim::Simulation )
     move_dogs!( sim.world, sim.dt )
     move_sheep!( sim )
     work!( sim.world, sim.dt )
-    sim.time[] += dt
+    sim.time[] += sim.dt
 end # function
 
 function move_sheep!( sim::Simulation )
