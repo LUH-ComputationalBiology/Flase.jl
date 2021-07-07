@@ -15,6 +15,10 @@ include("collectors/Dogs.jl")
 include("items/Sheeps.jl")
 include("items/DenseSheeps.jl")
 
+include("measures/Measure.jl")
+include("measures/MeanSquaredDisplacement.jl")
+include("measures/MeanQuadraticDistance.jl")
+
 include("World.jl")
 
 include("item-collector-interactions.jl")
