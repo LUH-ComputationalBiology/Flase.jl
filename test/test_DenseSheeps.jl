@@ -1,7 +1,7 @@
 using Flase, Test
 
 n_sheeps = 10
-sheeps = DenseSheeps( n_sheeps = n_sheeps, gridsize = 10 )
+sheeps = DenseSheeps( 10, n_sheeps = n_sheeps )
 @testset "Diffusion" begin
     @test sheeps.grid[Flase.getRandomSheep( sheeps )] != 0
     for (n, coords) in sheeps

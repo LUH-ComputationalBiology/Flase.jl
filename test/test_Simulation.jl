@@ -9,8 +9,8 @@ world = World(
         friction = 1.0
         ),
     sheeps = DenseSheeps(
+        10,
         n_sheeps = 10,
-        gridsize = 10,
         )
     )
 simulation = FiniteSimulation(;

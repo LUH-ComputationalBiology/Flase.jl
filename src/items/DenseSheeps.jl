@@ -21,8 +21,7 @@ function DenseSheeps{L}( total_sheep; kwargs...  ) where L
     return sheep
 end # function
 
-#TODO: this method overwrites Base.@kwdefs method
-function DenseSheeps(; gridsize, n_sheeps, kwargs...)
+function DenseSheeps(gridsize; n_sheeps, kwargs...)
     return DenseSheeps{gridsize}(n_sheeps; kwargs...)
 end # function
 

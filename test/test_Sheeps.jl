@@ -5,7 +5,7 @@ using StaticArrays
 @testset "Dense Sheeps" begin
     sheep = Flase.DenseSheeps{10}()
     sheep10 = Flase.DenseSheeps{10}(10)
-    zero_grid = Size(10,10)(zeros(Int,10,10))
+    zero_grid = SizedMatrix{10,10}(zeros(Int,10,10))
     @testset "Defaults" begin
         @test sheep.capacity == 1
         @test sheep.current_sheep[] == 0
