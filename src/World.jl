@@ -47,8 +47,8 @@ end # function
 
 function getSheepCoords( world::World{<:Number,<:Dogs,<:Sheeps{L}}, position ) where L
     x, y = position
-    i = convert(typeof(L), (x ÷ world.boxsize[] * L)) + 1
-    j = convert(typeof(L), (y ÷ world.boxsize[] * L)) + 1
+    i = convert(typeof(L), (x * L) ÷ world.boxsize[]) + 1
+    j = convert(typeof(L), (y * L) ÷ world.boxsize[]) + 1
     return i,j
 end # function
 

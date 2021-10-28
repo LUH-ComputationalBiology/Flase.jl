@@ -21,9 +21,16 @@ simulation = FiniteSimulation(;
     )
 
 @testset "Move items" begin
+    old_grid = copy(simulation.world.sheeps.grid)
     @test simulation.time[] < simulation.t_sheep_boredom[]
     @test Flase.move_sheep!( simulation ) == false
     simulation.time[] = simulation.t_sheep_boredom[] + 1
     @test Flase.move_sheep!( simulation ) == true
     simulation.time[] = zero( simulation.time[] )
+    @test old_grid != simulation.world.sheeps.grid
 end # testset
+
+@testset "Interactions" begin
+    pos = simulation.world.dogs.member[3].position
+    @test all(pos .< Flase.getSheepCoords(simulation.world, pos))
+end

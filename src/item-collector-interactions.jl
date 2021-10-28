@@ -4,6 +4,7 @@ work!( world::World, d::Dog, dt ) = work!( world, Val(d.state), d, dt )
 function work!( world, ::Val{ACTIVE}, dog::Dog, dt )
     i,j = getSheepCoords( world, dog.position )
     n_sheep = getNSheep( world.sheeps, i, j )
+    n_sheep > 0 && @show n_sheep
     n_sheep == 0 && return dog
     if rand() < n_sheep * world.business_rate * dt
         # pick up a sheep
