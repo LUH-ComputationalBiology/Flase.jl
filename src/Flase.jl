@@ -13,7 +13,13 @@ include("motions/BrownianMotion.jl")
 include("collectors/Dog.jl")
 include("collectors/Dogs.jl")
 include("items/Sheeps.jl")
+include("items/BaseSheeps.jl")
 include("items/DenseSheeps.jl")
+include("items/SparseSheeps.jl")
+
+include("measures/Measure.jl")
+include("measures/MeanSquaredDisplacement.jl")
+include("measures/MeanQuadraticDistance.jl")
 
 include("measures/Measure.jl")
 include("measures/MeanSquaredDisplacement.jl")
