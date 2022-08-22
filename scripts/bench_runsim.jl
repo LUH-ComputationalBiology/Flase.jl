@@ -7,8 +7,8 @@ using BenchmarkTools
 @time begin
 v0 = 5.0
 Dϕ = 4.0
-gridsize = 10
-frac = 0.1
+gridsize = 200
+frac = 0.9
 world = World(
     v0 = 1.,
     n_dogs = 9,
@@ -20,7 +20,7 @@ world = World(
         noise = v0^4 / Dϕ,
         friction = Dϕ / v0^2
         ),
-    sheeps = DenseSheeps(
+    sheeps = Flase.BaseSheeps(
         gridsize, # gridsize
         n_sheeps = frac * gridsize^2,
         )
@@ -32,6 +32,7 @@ simulation = FiniteSimulation(;
     plotter = Flase.VoidPlotter()
     )
 end
-@benchmark begin
+t = @benchmark begin
     Flase.runsim( simulation )
-end samples = 1 evals = 1 gcsample = true
+end
+display(t)

@@ -6,8 +6,9 @@ function setNSheep!( sheep::Sheeps, i, j, n )
     return nothing
 end # function
 
+#Diffusion Candidates leeren
 function kickSheep!( sheep::Sheeps )
-    while !isempty(sheep.diffusion_candidates)
+    while !isempty(sheep.diffusion_candidates) #While not empty (! bedeutet not)
         coords = popfirst!( sheep.diffusion_candidates )
         n_sheep = getNSheep( sheep, coords... )
         if n_sheep <= sheep.capacity
