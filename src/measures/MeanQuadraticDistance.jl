@@ -1,6 +1,6 @@
 # Use for calculating sqr distance
 
-#first we need a new structur 
+#first we need a new structure
 
 struct MQD end 
 
