@@ -1,4 +1,4 @@
-#X"Use for calculating sqr distance" 
+# Use for calculating sqr distance
 
 #first we need a new structur 
 
