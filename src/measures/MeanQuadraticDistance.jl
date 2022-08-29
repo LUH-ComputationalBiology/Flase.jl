@@ -5,7 +5,7 @@
 struct MQD end 
 
 #then compute the function that takes imput from object sheep::Sheeps 
-function SqrDist(sheep, sheep1, gridsizestorage) 
+function sqr_dist(sheep, sheep1, gridsizestorage) 
 
 d1 =min(abs(sheep[2][1] - sheep1[2][1]), gridsizestorage  - abs(sheep[2][1] - sheep1[2][1]))
 d2 =min(abs(sheep[2][2] - sheep1[2][2]), gridsizestorage  - abs(sheep[2][2] - sheep1[2][2])) 
