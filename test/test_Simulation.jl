@@ -2,7 +2,7 @@ using Flase, Test
 
 world = World(
     v0 = 1.,
-    n_dogs = 120,
+    n_dogs = 25,
     boxsize = 10.0,
     motion = BrownianMotion(
         noise = 0.5,
@@ -10,7 +10,7 @@ world = World(
         ),
     sheeps = DenseSheeps(
         10,
-        n_sheeps = 10,
+        n_sheeps = 50,
         )
     )
 simulation = FiniteSimulation(;
@@ -19,6 +19,24 @@ simulation = FiniteSimulation(;
     world = world,
     plotter = UnicodePlotter()
     )
+
+
+simulation2 = Flase.ClusterTimeSimulation(;
+ condition = 0,
+ dt = 0.2,
+ world = world, 
+ plotter = VoidPlotter()
+)
+
+@testset "ClusterTimeSimulation" begin
+
+   
+    @show runsim(simulation2)
+    
+   
+   end
+
+
 
 @testset "Move items" begin
     old_grid = copy(simulation.world.sheeps.grid)
@@ -34,3 +52,4 @@ end # testset
     pos = simulation.world.dogs.member[3].position
     @test all(pos .< Flase.getSheepCoords(simulation.world, pos))
 end
+

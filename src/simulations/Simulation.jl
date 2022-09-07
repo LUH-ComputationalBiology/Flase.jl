@@ -21,6 +21,6 @@ function move_sheep!( sim::Simulation )
 
         kickSheep!( sim.world.sheeps )
         return true
-    end # if
+    end # if
     return false
 end # function
