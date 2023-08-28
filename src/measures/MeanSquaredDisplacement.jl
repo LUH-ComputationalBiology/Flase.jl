@@ -1,5 +1,7 @@
 "Type for calculating the mean squared displacement."
-struct MSD end
+struct MSD 
+    msd::AbstractFloat
+end
 
 function measure(::MSD, sheeps::Sheeps)
     # get center of mass

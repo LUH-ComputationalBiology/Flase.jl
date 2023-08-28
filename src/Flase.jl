@@ -1,8 +1,8 @@
 module Flase
 
-export InfiniteSimulation, FiniteSimulation, runsim
+export InfiniteSimulation, FiniteSimulation, runsim, ClusterTimeSimulation
 export BrownianMotion, ConstVelocity
-export UnicodePlotter
+export UnicodePlotter, VoidPlotter
 export World
 export DenseSheeps
 
@@ -30,6 +30,7 @@ include("plotter/VoidPlotter.jl")
 include("plotter/UnicodePlotter.jl")
 
 include("simulations/Simulation.jl")
+include("simulations/ClusterTimeSimulation.jl")
 include("simulations/InfiniteSimulation.jl")
 include("simulations/FiniteSimulation.jl")
 

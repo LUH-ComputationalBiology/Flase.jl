@@ -2,7 +2,9 @@
 
 #first we need a new structure
 
-struct MQD end
+struct MQD 
+    mqd::AbstractFloat
+end
 
 #then compute the function that takes imput from object sheep::Sheeps 
 function sqr_dist(sheep, sheep1, gridsizestorage)
@@ -39,7 +41,7 @@ function measure(::MQD, sheeps::Sheeps)
 
 
 
-            mean += sheep[1] * sheep1[1] * SqrDist(sheep, sheep1, gridsizestorage)
+            mean += sheep[1] * sheep1[1] * sqr_dist(sheep, sheep1, gridsizestorage)
             counter += sheep[1] * sheep1[1]
 
         end
