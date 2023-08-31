@@ -7,6 +7,7 @@ world = World(
     motion = BrownianMotion(noise = 0.5, friction = 1.0),
     sheeps = DenseSheeps(10, n_sheeps = 10),
 )
+
 simulation = FiniteSimulation(;
     dt = 0.2,
     end_time = 100.0,
@@ -28,3 +29,15 @@ end # testset
     pos = simulation.world.dogs.member[3].position
     @test all(pos .< Flase.getSheepCoords(simulation.world, pos))
 end
+
+
+simulation2 = Flase.ClusterTimeSimulation(;
+ condition = 0,
+ dt = 0.2,
+ world = world, 
+ plotter = Flase.VoidPlotter()
+)
+
+@testset "ClusterTimeSimulation" begin
+    @show runsim(simulation2)
+   end

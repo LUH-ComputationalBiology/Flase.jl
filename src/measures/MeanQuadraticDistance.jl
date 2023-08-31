@@ -3,7 +3,6 @@
 #first we need a new structure
 
 struct MQD 
-    mqd::AbstractFloat
 end
 
 #then compute the function that takes imput from object sheep::Sheeps 
@@ -22,11 +21,9 @@ function sqr_dist(sheep, sheep1, gridsizestorage)
 end
 
 
-
 function measure(::MQD, sheeps::Sheeps)
     #set a 3x3 Matrix for Test purpose. Result should be 3/4 
     #setvariables counter(=unsigned Integer), mean(=Float64) to 0  
-
 
     gridsizestorage = size(sheeps.grid)[1]
 
@@ -38,17 +35,20 @@ function measure(::MQD, sheeps::Sheeps)
 
         for sheep1 in sheeps
 
-
-
-
             mean += sheep[1] * sheep1[1] * sqr_dist(sheep, sheep1, gridsizestorage)
             counter += sheep[1] * sheep1[1]
 
         end
 
     end
-
+    println(mean)
+    println(counter)
     return mean / counter
 
+end
 
+
+function getMQD(mqd::MQD, sheeps::Sheeps, mqdNorm::Float64)
+    mqd_value = measure(mqd, sheeps)/mqdNorm
+    return mqd_value
 end
