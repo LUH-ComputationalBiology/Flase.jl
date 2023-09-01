@@ -14,14 +14,15 @@ function measure(::MSD, sheeps::Sheeps, world::World)
 end
 
 function getClusterRadius(sheeps::Sheeps, world::World)
-    clusterRadius = sqrt(sheeps.current_sheep[] / sheeps.capacity / π) * (world.boxsize[] / size(sheeps.grid)[1])
+    clusterRadius = sqrt(sheeps.current_sheep[] / sheeps.capacity / π) * world.boxsize[] / size(sheeps.grid)[1]
     return clusterRadius
 end
 
 function getMSD(msd::MSD, sheeps::Sheeps, world::World)
     R_cl = getClusterRadius(sheeps, world)
     R_item = size(sheeps.grid)[1] / 2
-    msdNorm = R_cl * R_cl / 2 + R_cl * R_item
+    msdNorm = (R_cl * R_cl) / 2 + R_cl * R_item
     msd_value = msdNorm / measure(msd, sheeps, world)
+    println(msdNorm)
     return msd_value
 end

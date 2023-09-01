@@ -31,30 +31,40 @@ function runsim(sim::ClusterTimeSimulation)
 mqd = MQD()
 msd = MSD()
 mqdNorm = measure(mqd, sim.world.sheeps)
+mqd_value = getMQD(mqd, sim.world.sheeps, mqdNorm)
+msd_value = getMSD(msd, sim.world.sheeps, sim.world)
+
 p = plot(sim.plotter, sim.world, sim.time[])
 io = IOBuffer()
 if sim.condition == 0
-    while getMSD(msd, sim.world.sheeps, sim.world) < sim.msdThreshold
+    while msd_value < sim.msdThreshold
 
+        println("I'm in 1")
         measure(msd, sim.world.sheeps)
         iterate!(sim)
         plot!(io, p, sim.plotter, sim.world, sim.time[])
+        msd_value = getMSD(msd, sim.world.sheeps, sim.world)
 
     end
 elseif sim.condition == 1
-    while getMQD(mqd, sim.world.sheeps, mqdNorm) > sim.mqdThreshold
+    while mqd_value > sim.mqdThreshold
 
+        println("I'm in 2")
         measure(mqd, sim.world.sheeps)
         iterate!(sim)
         plot!(io, p, sim.plotter, sim.world, sim.time[])
+        mqd_value = getMQD(mqd, sim.world.sheeps, mqdNorm)
 
     end
 elseif sim.condition == 2
-    while getMSD(msd, sim.world.sheeps, sim.world) < sim.msdThreshold && getMQD(mqd, sim.world.sheeps, mqdNorm) > sim.mqdThreshold
+    while msd_value < sim.msdThreshold && mqd_value > sim.mqdThreshold
 
+        println("I'm in 3")
         measure(mqd, sim.world.sheeps)
         iterate!(sim)
         plot!(io, p, sim.plotter, sim.world, sim.time[])
+        mqd_value = getMQD(mqd, sim.world.sheeps, mqdNorm)
+        msd_value = getMSD(msd, sim.world.sheeps, sim.world)
 
     end
 else sim.condition == 3
