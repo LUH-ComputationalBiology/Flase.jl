@@ -34,7 +34,7 @@ mqdNorm = measure(mqd, sim.world.sheeps)
 p = plot(sim.plotter, sim.world, sim.time[])
 io = IOBuffer()
 if sim.condition == 0
-    while msd < msdThreshold
+    while getMSD(msd, sim.world.sheeps, sim.world) < sim.msdThreshold
 
         measure(msd, sim.world.sheeps)
         iterate!(sim)
@@ -50,7 +50,7 @@ elseif sim.condition == 1
 
     end
 elseif sim.condition == 2
-    while ms.msd < sim.msdThreshold && getMQD(mqd, sim.world.sheeps, mqdNorm) > sim.mqdThreshold
+    while getMSD(msd, sim.world.sheeps, sim.world) < sim.msdThreshold && getMQD(mqd, sim.world.sheeps, mqdNorm) > sim.mqdThreshold
 
         measure(mqd, sim.world.sheeps)
         iterate!(sim)

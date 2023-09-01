@@ -20,6 +20,13 @@ function sqr_dist(sheep, sheep1, gridsizestorage)
     return d1 * d1 + d2 * d2
 end
 
+function realSpace_sqr_dist(sheep, gridsizestorage, x::Real, y::Real, world::World)
+    ri = sheep[2][1] / gridsizestorage * world.boxsize[]
+    rj = sheep[2][2] / gridsizestorage * world.boxsize[]
+    d1 = min(abs(ri - x), world.boxsize[] - abs(ri - x))
+    d2 = min(abs(rj - y), world.boxsize[] - abs(rj - y))
+    return d1 * d1 + d2 * d2
+end
 
 function measure(::MQD, sheeps::Sheeps)
     #set a 3x3 Matrix for Test purpose. Result should be 3/4 
@@ -41,8 +48,7 @@ function measure(::MQD, sheeps::Sheeps)
         end
 
     end
-    println(mean)
-    println(counter)
+
     return mean / counter
 
 end
