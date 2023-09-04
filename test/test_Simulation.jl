@@ -40,4 +40,6 @@ simulation2 = Flase.ClusterTimeSimulation(;
 
 @testset "ClusterTimeSimulation" begin
     @show runsim(simulation2)
+    @test getMSD(msd, sim.world.sheeps, sim.world) < 0.7
+    @test getMQD(mqd, sim.world.sheeps, mqdNorm) > 0.1
    end

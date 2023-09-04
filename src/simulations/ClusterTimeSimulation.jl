@@ -39,8 +39,8 @@ io = IOBuffer()
 if sim.condition == 0
     while msd_value < sim.msdThreshold
 
-        println("I'm in 1")
-        measure(msd, sim.world.sheeps)
+        println("I'm in 0")
+        measure(msd, sim.world.sheeps, sim.world)
         iterate!(sim)
         plot!(io, p, sim.plotter, sim.world, sim.time[])
         msd_value = getMSD(msd, sim.world.sheeps, sim.world)
@@ -49,7 +49,7 @@ if sim.condition == 0
 elseif sim.condition == 1
     while mqd_value > sim.mqdThreshold
 
-        println("I'm in 2")
+        println("I'm in 1")
         measure(mqd, sim.world.sheeps)
         iterate!(sim)
         plot!(io, p, sim.plotter, sim.world, sim.time[])
@@ -59,7 +59,7 @@ elseif sim.condition == 1
 elseif sim.condition == 2
     while msd_value < sim.msdThreshold && mqd_value > sim.mqdThreshold
 
-        println("I'm in 3")
+        println("I'm in 2")
         measure(mqd, sim.world.sheeps)
         iterate!(sim)
         plot!(io, p, sim.plotter, sim.world, sim.time[])

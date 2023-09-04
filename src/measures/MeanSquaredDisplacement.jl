@@ -23,6 +23,5 @@ function getMSD(msd::MSD, sheeps::Sheeps, world::World)
     R_item = size(sheeps.grid)[1] / 2
     msdNorm = (R_cl * R_cl) / 2 + R_cl * R_item
     msd_value = msdNorm / measure(msd, sheeps, world)
-    println(msdNorm)
     return msd_value
 end
