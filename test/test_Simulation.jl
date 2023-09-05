@@ -1,18 +1,18 @@
 using Flase, Test
 
 world = World(
-    v0 = 1.0,
-    n_dogs = 120,
-    boxsize = 10.0,
-    motion = BrownianMotion(noise = 0.5, friction = 1.0),
-    sheeps = DenseSheeps(10, n_sheeps = 10),
+    v0=1.0,
+    n_dogs=120,
+    boxsize=10.0,
+    motion=BrownianMotion(noise=0.5, friction=1.0),
+    sheeps=DenseSheeps(10, n_sheeps=10),
 )
 
 simulation = FiniteSimulation(;
-    dt = 0.2,
-    end_time = 100.0,
-    world = world,
-    plotter = UnicodePlotter(),
+    dt=0.2,
+    end_time=100.0,
+    world=world,
+    plotter=UnicodePlotter()
 )
 
 @testset "Move items" begin
@@ -32,14 +32,17 @@ end
 
 
 simulation2 = Flase.ClusterTimeSimulation(;
- condition = 0,
- dt = 0.2,
- world = world, 
- plotter = Flase.VoidPlotter()
+    condition=0,
+    dt=0.2,
+    world=world,
+    plotter=Flase.VoidPlotter()
 )
 
 @testset "ClusterTimeSimulation" begin
-    @show runsim(simulation2)
-    @test getMSD(msd, sim.world.sheeps, sim.world) < 0.7
-    @test getMQD(mqd, sim.world.sheeps, mqdNorm) > 0.1
-   end
+    mqd = Flase.MQD()
+    msd = Flase.MSD()
+    mqdNorm = Flase.measure(mqd, simulation2.world.sheeps)
+    @show Flase.runsim(simulation2)
+    @test Flase.getMSD(msd, simulation2.world.sheeps, simulation2.world) < 0.7
+    @test Flase.getMQD(mqd, simulation2.world.sheeps, mqdNorm) > 0.1
+end

@@ -1,6 +1,5 @@
 "Type for calculating the mean squared displacement."
-struct MSD 
-end
+struct MSD end
 
 function measure(::MSD, sheeps::Sheeps, world::World)
     # get center of mass
@@ -14,7 +13,9 @@ function measure(::MSD, sheeps::Sheeps, world::World)
 end
 
 function getClusterRadius(sheeps::Sheeps, world::World)
-    clusterRadius = sqrt(sheeps.current_sheep[] / sheeps.capacity / π) * world.boxsize[] / size(sheeps.grid)[1]
+    clusterRadius =
+        sqrt(sheeps.current_sheep[] / sheeps.capacity / π) * world.boxsize[] /
+        size(sheeps.grid)[1]
     return clusterRadius
 end
 
