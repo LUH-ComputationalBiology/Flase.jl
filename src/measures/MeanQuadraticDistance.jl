@@ -6,11 +6,11 @@ Base.@kwdef struct MQD
     mqdNorm::Float64
 end
 
-MQD() = MQD(0)
+MQD() = MQD(1)
 
 function MQD(sheeps::Sheeps)
     mqdNorm = measure(MQD(), sheeps)
-    return mqdNorm
+    return MQD(mqdNorm)
 end
 
 #then compute the function that takes imput from object sheep::Sheeps 
@@ -62,7 +62,7 @@ function measure(::MQD, sheeps::Sheeps)
 end
 
 
-function getMQD(mqd::MQD, sheeps::Sheeps, mqdNorm::Float64)
-    mqd_value = measure(mqd, sheeps) / mqdNorm
+function getMQD(mqd::MQD, sheeps::Sheeps)
+    mqd_value = measure(mqd, sheeps) / mqd.mqdNorm
     return mqd_value
 end

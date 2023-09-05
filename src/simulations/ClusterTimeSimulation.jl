@@ -37,10 +37,9 @@ ClusterTimeSimulation(;
 
 
 function runsim(sim::ClusterTimeSimulation)
-    mqd = MQD()
     msd = MSD()
-    mqdNorm = MQD(sim.world.sheeps)
-    mqd_value = getMQD(mqd, sim.world.sheeps, mqdNorm)
+    mqd = MQD(sim.world.sheeps)
+    mqd_value = getMQD(mqd, sim.world.sheeps)
     msd_value = getMSD(msd, sim.world.sheeps, sim.world)
 
     p = plot(sim.plotter, sim.world, sim.time[])
@@ -62,7 +61,7 @@ function runsim(sim::ClusterTimeSimulation)
             measure(mqd, sim.world.sheeps)
             iterate!(sim)
             plot!(io, p, sim.plotter, sim.world, sim.time[])
-            mqd_value = getMQD(mqd, sim.world.sheeps, mqdNorm)
+            mqd_value = getMQD(mqd, sim.world.sheeps)
 
         end
     elseif sim.condition == 2
@@ -72,7 +71,7 @@ function runsim(sim::ClusterTimeSimulation)
             measure(mqd, sim.world.sheeps)
             iterate!(sim)
             plot!(io, p, sim.plotter, sim.world, sim.time[])
-            mqd_value = getMQD(mqd, sim.world.sheeps, mqdNorm)
+            mqd_value = getMQD(mqd, sim.world.sheeps)
             msd_value = getMSD(msd, sim.world.sheeps, sim.world)
 
         end
