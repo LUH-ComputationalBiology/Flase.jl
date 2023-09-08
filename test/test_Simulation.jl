@@ -43,7 +43,7 @@ simulation2 = Flase.ClusterTimeSimulation(;
     condition=0,
     dt=0.2,
     world=world2,
-    plotter=Flase.UnicodePlotter()
+    plotter=Flase.VoidPlotter()
 )
 
 @testset "ClusterTimeSimulation" begin
