@@ -46,10 +46,18 @@ simulation2 = Flase.ClusterTimeSimulation(;
     plotter=Flase.VoidPlotter()
 )
 
+simulation3 = Flase.ClusterTimeSimulation(;
+    condition=1,
+    dt=0.2,
+    world=world,
+    plotter=Flase.VoidPlotter()
+)
+
 @testset "ClusterTimeSimulation" begin
     mqd = Flase.MQD(simulation2.world.sheeps)
     msd = Flase.MSD()
     @show Flase.runsim(simulation2)
+    @show Flase.runsim(simulation3)
     @test Flase.getMSD(msd, simulation2.world.sheeps, simulation2.world) >= 0.7
-    @test Flase.getMQD(mqd, simulation2.world.sheeps) <= 0.1
+    @test Flase.getMQD(mqd, simulation3.world.sheeps) <= 0.1
 end
