@@ -5,8 +5,10 @@ version = "0.1.0"
 
 [deps]
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+DocumentFormat = "ffa9a821-9c82-50df-894e-fbcef3ed31cd"
 GeometryTypes = "4d00f742-c7ba-57c2-abde-4428a4b178cb"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 UnicodePlots = "b8865327-cd53-5732-bb35-84acbb429228"

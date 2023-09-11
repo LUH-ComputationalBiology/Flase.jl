@@ -44,7 +44,7 @@ end # function
 
 function plot!(io, p, plotter::UnicodePlotter, world::World, time)
     if plotter.counter[] % plotter.skip == zero(CountType)
-        for _ = 1:(UnicodePlots.nrows(p.graphics)+p.margin)
+        for _ = 1:(UnicodePlots.nrows(p.graphics)+p.margin.x)
             print(io, "\e[2K\e[1F")
         end # for
         p = plot(plotter, world, time)

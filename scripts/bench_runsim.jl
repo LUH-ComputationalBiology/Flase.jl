@@ -5,34 +5,31 @@ using Flase
 using BenchmarkTools
 
 @time begin
-v0 = 5.0
-Dϕ = 4.0
-gridsize = 200
-frac = 0.9
-world = World(
-    v0 = 1.,
-    n_dogs = 9,
-    boxsize = float(gridsize),
-    freedom_rate = 10.0,
-    business_rate = 10.0,
-    meanSleepyness = 10.0,
-    motion = BrownianMotion(
-        noise = v0^4 / Dϕ,
-        friction = Dϕ / v0^2
+    v0 = 5.0
+    Dϕ = 4.0
+    gridsize = 200
+    frac = 0.9
+    world = World(
+        v0 = 1.0,
+        n_dogs = 9,
+        boxsize = float(gridsize),
+        freedom_rate = 10.0,
+        business_rate = 10.0,
+        meanSleepyness = 10.0,
+        motion = BrownianMotion(noise = v0^4 / Dϕ, friction = Dϕ / v0^2),
+        sheeps = Flase.BaseSheeps(
+            gridsize, # gridsize
+            n_sheeps = frac * gridsize^2,
         ),
-    sheeps = Flase.BaseSheeps(
-        gridsize, # gridsize
-        n_sheeps = frac * gridsize^2,
-        )
     )
-simulation = FiniteSimulation(;
-    dt = 0.1,
-    end_time = 100.0,
-    world = world,
-    plotter = Flase.VoidPlotter()
+    simulation = FiniteSimulation(;
+        dt = 0.1,
+        end_time = 100.0,
+        world = world,
+        plotter = Flase.VoidPlotter(),
     )
 end
 t = @benchmark begin
-    Flase.runsim( simulation )
+    Flase.runsim(simulation)
 end
 display(t)

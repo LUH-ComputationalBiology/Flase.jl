@@ -1,8 +1,8 @@
 module Flase
 
-export InfiniteSimulation, FiniteSimulation, runsim
+export InfiniteSimulation, FiniteSimulation, runsim, ClusterTimeSimulation
 export BrownianMotion, ConstVelocity
-export UnicodePlotter
+export UnicodePlotter, VoidPlotter
 export World
 export DenseSheeps
 
@@ -17,11 +17,11 @@ include("items/BaseSheeps.jl")
 include("items/DenseSheeps.jl")
 include("items/SparseSheeps.jl")
 
+include("World.jl")
+
 include("measures/Measure.jl")
 include("measures/MeanSquaredDisplacement.jl")
 include("measures/MeanQuadraticDistance.jl")
-
-include("World.jl")
 
 include("item-collector-interactions.jl")
 
@@ -30,6 +30,7 @@ include("plotter/VoidPlotter.jl")
 include("plotter/UnicodePlotter.jl")
 
 include("simulations/Simulation.jl")
+include("simulations/ClusterTimeSimulation.jl")
 include("simulations/InfiniteSimulation.jl")
 include("simulations/FiniteSimulation.jl")
 
